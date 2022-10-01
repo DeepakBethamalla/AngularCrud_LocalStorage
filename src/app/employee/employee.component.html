@@ -1,0 +1,99 @@
+
+<div class="container row employeeTable">
+    <div class=" col-md-4">
+        <div class="headers">
+            <h2 class="table-title"> Employee Data </h2>
+        </div>
+
+        <form #form="ngForm">
+            <div class="mb-3 row employeeData ">
+                <label class="col-md-4 col-form-label">EmpName:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" name="EmpName" #EmpName="ngModel" required [(ngModel)] = "employeeObj.EmpName"  placeholder="Name" >
+                  <div *ngIf = EmpName.touched>
+                    <span *ngIf = "EmpName.errors?.['required']">required</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3 row employeeData">
+                <label class="col-sm-4 col-form-label">EmpAge:</label>
+                <div class="col-sm-8">
+                  <input type="number" class="form-control" name="EmpAge" #EmpAge="ngModel"  required [(ngModel)] = "employeeObj.EmpAge"   placeholder="Age">
+                  <div *ngIf = EmpAge.touched>
+                    <span *ngIf = "EmpAge.errors?.['required']">required</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3 row employeeData">
+                <label class="col-sm-4 col-form-label">EmpCompany:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" name="EmpCompany" #EmpCompany="ngModel" required [(ngModel)] = "employeeObj.EmpCompany"  placeholder="Company">
+                  <div *ngIf = EmpCompany.touched>
+                    <span *ngIf = "EmpCompany.errors?.['required']">required</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3 row employeeData">
+                <label class="col-sm-4 col-form-label">EmpSalary:</label>
+                <div class="col-sm-8">
+                  <input type="number" class="form-control" name="EmpSalary" #EmpSalary="ngModel" required [(ngModel)] = "employeeObj.EmpSalary" placeholder="Salary">
+                  <div *ngIf = EmpSalary.touched>
+                    <span *ngIf = "EmpSalary.errors?.['required']">required</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-6 ">
+                <button class=" mb-3 btn btn-primary add " [disabled]="form.invalid" (click)="onSave()">Add Employee</button>
+                <!-- <button class="mb-3 btn btn-danger "> Cancle</button> -->
+              </div>
+        </form>
+        
+
+    </div>
+
+    <div class=" col-md-8  table-hover">
+        <div class="container mob-table" >
+
+            <div class="headers">
+                <h2 class="table-title">Employee Data List</h2>
+                <!-- <button class="btn add"> Add Employee</button> -->
+            </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>EmpName</th>
+                    <th>EmpAge</th>
+                    <th>EmpCompany</th>
+                    <th>EmpSalary</th>
+                </tr>
+                </thead>
+                <tbody class="text-center">
+                    <ng-container *ngIf = "employeeArr.length != 0">
+                        <tr *ngFor = "let item of employeeArr">
+                            <td>{{item.EmpName}}</td>
+                            <td>{{item.EmpAge}}</td>
+                            <td>{{item.EmpCompany}}</td>
+                            <td>{{item.EmpSalary}}</td>
+                            <td>
+                                <button class="btn btn-primary" (click)="onEdit(item)"> Edit</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="onDelete(item)" > Delete</button>
+                            </td>
+                            </tr>    
+                    </ng-container>
+                    <ng-container *ngIf = "employeeArr.length == 0">
+                        <tr>
+                            <td colspan="4" class="text-center"> No Record Present</td>
+                        </tr>
+
+                    </ng-container>
+                    
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
